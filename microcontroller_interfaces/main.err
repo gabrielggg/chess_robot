@@ -1,0 +1,20 @@
+>>> Warning 214 "main.c" Line 71(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 71(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 71(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 78(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 78(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 78(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 208 "main.c" Line 24(1,4): Function not void and does not return a value  RB0
+>>> Warning 203 "main.c" Line 119(1,1): Condition always TRUE
+>>> Warning 214 "main.c" Line 307(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 307(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 315(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 315(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 323(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 323(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 331(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 331(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 216 "main.c" Line 361(0,1): Interrupts disabled during call to prevent re-entrancy:  (@delay_ms1)
+>>> Warning 216 "main.c" Line 361(0,1): Interrupts disabled during call to prevent re-entrancy:  (@PSTRINGC7_9600_62_63)
+      Memory usage:   ROM=15%      RAM=61% - 62%
+      0 Errors,  18 Warnings.

@@ -1,0 +1,20 @@
+>>> Warning 214 "feria.c" Line 73(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "feria.c" Line 73(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "feria.c" Line 73(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "feria.c" Line 80(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "feria.c" Line 80(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "feria.c" Line 80(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 208 "feria.c" Line 24(1,4): Function not void and does not return a value  RB0
+>>> Warning 203 "feria.c" Line 121(1,1): Condition always TRUE
+>>> Warning 214 "feria.c" Line 309(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "feria.c" Line 309(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "feria.c" Line 317(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "feria.c" Line 317(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "feria.c" Line 325(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "feria.c" Line 325(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "feria.c" Line 333(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "feria.c" Line 333(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 216 "feria.c" Line 363(0,1): Interrupts disabled during call to prevent re-entrancy:  (@delay_ms1)
+>>> Warning 216 "feria.c" Line 363(0,1): Interrupts disabled during call to prevent re-entrancy:  (@PSTRINGC7_9600_62_63)
+      Memory usage:   ROM=15%      RAM=61% - 62%
+      0 Errors,  18 Warnings.

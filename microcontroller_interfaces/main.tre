@@ -1,0 +1,26 @@
+ÀÄmain
+   ÃÄMAIN  0/711  Ram=3
+   ³  ÃÄ??0??
+   ³  ÃÄ@delay_ms1  0/20  Ram=1
+   ³  ÀÄ@PSTRINGC7_9600_62_63  0/60  Ram=3
+   ÀÄRB0  0/297  Ram=3
+      ÃÄ@delay_ms1  0/20  Ram=1
+      ÃÄ@PRINTF_U_9600_62_63  0/66  Ram=2
+      ³  ÃÄ@DIV88  0/23  Ram=3
+      ³  ÀÄ@DIV88  0/23  Ram=3
+      ÃÄ@PRINTF_U_9600_62_63  0/66  Ram=2
+      ³  ÃÄ@DIV88  0/23  Ram=3
+      ³  ÀÄ@DIV88  0/23  Ram=3
+      ÃÄ@PSTRINGC7_9600_62_63  0/60  Ram=3
+      ÃÄ@PSTRINGC7_9600_62_63  0/60  Ram=3
+      ÃÄ@PSTRINGC7_9600_62_63  0/60  Ram=3
+      ÃÄ@delay_ms1  0/20  Ram=1
+      ÃÄ@PSTRINGC7_9600_62_63  0/60  Ram=3
+      ÃÄ@delay_ms1  0/20  Ram=1
+      ÃÄ@PRINTF_U_9600_62_63  0/66  Ram=2
+      ³  ÃÄ@DIV88  0/23  Ram=3
+      ³  ÀÄ@DIV88  0/23  Ram=3
+      ÃÄ@PRINTF_U_9600_62_63  0/66  Ram=2
+      ³  ÃÄ@DIV88  0/23  Ram=3
+      ³  ÀÄ@DIV88  0/23  Ram=3
+      ÀÄ@delay_ms1  0/20  Ram=1

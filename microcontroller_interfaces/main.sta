@@ -1,0 +1,60 @@
+
+ROM used: 1243 (15%)
+          1243 (15%) including unused fragments
+
+          1 Average locations per line
+          6 Average locations per statement
+
+RAM used: 223 (61%) at main() level
+          230 (62%) worst case
+
+Stack used: 4 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  360   213 100  main.c
+  326     0   0  ..\..\..\..\Program Files (x86)\PICC\devices\16f877A.h
+   37     0   0  ..\..\..\..\Program Files (x86)\PICC\drivers\stdio.h
+  409     0   0  ..\..\..\..\Program Files (x86)\PICC\drivers\string.h
+   28     0   0  ..\..\..\..\Program Files (x86)\PICC\drivers\stddef.h
+   28     0   0  ..\..\..\..\Program Files (x86)\PICC\drivers\ctype.h
+----- -----
+ 1188   213 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     20   2   1             @delay_ms1
+0    297  24   3  1772  7.3  RB0
+0     23   2   3             @DIV88
+0     66   5   2             @PRINTF_U_9600_62_63
+0      3   0   0             @const183
+0     60   5   3             @PSTRINGC7_9600_62_63
+0      4   0   0             @const185
+0      4   0   0             @const186
+0      4   0   0             @const187
+0    711  57   3  6566  7.4  MAIN
+0      4   0   0             @const191
+
+Program metrics:
+    Functions               2
+    Statements              213
+    Comments                188
+    Volume (V)              9190
+    Difficilty (D)          14.5
+    Effort to implement (E) 133500
+    Time to implement (T)   2 hours, 4 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   45
+    Maintainability (MI)    78
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-0002E    43  0  
+0002F-007FF  1196  805  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+
