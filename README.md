@@ -8,10 +8,18 @@ STEPS:
 
 1) Build a chess board with sensors. Here you can check how to build it https://sites.google.com/site/bergersprojects/reedcb/ .
 
+![alt text](https://github.com/gabrielggg/chess_robot/blob/master/img/sensory_board.png)
+
 2) Once you have the board make sure you can comunicate it with a computer you can use any protocoll but for this project i used rs-232 (serial) and i used the USB port of my computer with a USB-to-Serial Bridge connected to my PIC (tx rx) (you can buy this from amazon).
 The idea here is to process all the 64 outputs from sensors which are going to be (1 or 0) so you need to process all this data on the microcontroller and send it encoded in a way that can be decoded later on the PC with the c# snippet. i used a pic and 4 Multiplexers to be able to use less ports of the microcontroller. 
 
+Here is the circuit diagram on proteus to ilustrate my words
+
 ![alt text](https://github.com/gabrielggg/chess_robot/blob/master/img/microcontroller.png)
+![alt text](https://github.com/gabrielggg/chess_robot/blob/master/img/mux1.png)
+![alt text](https://github.com/gabrielggg/chess_robot/blob/master/img/mux2.png)
+![alt text](https://github.com/gabrielggg/chess_robot/blob/master/img/mux3.png)
+![alt text](https://github.com/gabrielggg/chess_robot/blob/master/img/mux4.png)
 
 Note: I done this part using CCS compiler.
 
