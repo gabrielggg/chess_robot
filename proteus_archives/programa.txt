@@ -1,0 +1,345 @@
+#include <16f877A.h>
+#fuses XT, NOWDT
+#use delay (clock=20000000)
+#use fast_io(B)
+#use fast_io(D)
+#include <stdio.h>
+#include <string.h>
+#use rs232(baud=9600, xmit=pin_c6, rcv=pin_c7, bits=8, parity=n)
+
+
+int r=0,z=0,j,i;
+int b=0;
+/*char a[16][3];
+char a1[16][3];
+char a2[16][3];
+char a3[16][3];*/
+int string4[]= {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int string[64];
+int uit=0;
+int pos1[]={0,0,0};
+int k=0;
+int string2[] ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int string3[] ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+#INT_EXT
+RB0(){
+//printf("%u,",r);
+
+//printf("%u;%u\r\n",string4[48],string3[r-1]);
+
+for( i = 0;i < 64;i++)
+{
+
+if(string4[i] != string2[i])
+{
+if(string2[i]==1)
+{
+pos1[1]= i;
+}
+if(string2[i]==0)
+{
+pos1[0]= i;
+}
+
+}
+//printf(",%u,",string[i]);
+
+}
+
+if (string4[40]==0 & string4[48]==0 & string2[40]==1  & string2[48]==1)
+{
+uit=1;
+printf("0;0\r\n");
+delay_ms(200);
+}
+
+
+k=0;
+/*if(z<6)
+{
+
+printf("%u;%u\r\n",string3[r-1],string3[0]);
+delay_ms(200);
+}*/
+if(uit!=1){
+
+printf("%u;%u\r\n",pos1[0],pos1[1]);
+delay_ms(200);
+}
+//printf("%s%s",[string3[0]],a[string3[r-1]]);
+
+//string2==string;
+for( i = 0;i < 64;i++)
+{
+string4[i] = string2[i];
+//printf(",%u,",string[i]);
+
+}
+//b=0;
+r=0;
+uit=0;
+/*for( j = 0;j < 16;j++)
+{
+string3[j] = 0;
+//printf(",%u,",string[i]);
+
+}*/
+}
+
+void main()
+{
+
+/*strcpy(a[0], "a1");
+strcpy(a[1], "a2");
+strcpy(a[2], "a3");
+strcpy(a[3], "a4");
+strcpy(a[4], "a5");
+strcpy(a[5], "a6");
+strcpy(a[6], "a7");
+strcpy(a[7], "a8");
+strcpy(a[8], "b1");
+strcpy(a[9], "b2");
+strcpy(a[10], "b3");
+strcpy(a[11], "b4");
+strcpy(a[12], "b5");
+strcpy(a[13], "b6");
+strcpy(a[14], "b7");
+strcpy(a[15], "b8");*/
+
+ enable_interrupts(INT_EXT);
+ enable_interrupts(global);
+//int string[16];
+//int string2[] ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+//int string3[] ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+//int b=0;
+port_b_pullups(TRUE);
+set_tris_B(0b11100001);
+
+//port_c_pullups(TRUE);
+set_tris_D(0b10000001);
+//output_low(PIN_B7);
+/*output_low(PIN_B5);
+output_low(PIN_B0);
+output_low(PIN_B6);*/
+while(1)
+{
+
+if(b==0){
+output_low(PIN_B1);
+output_low(PIN_B2);
+output_low(PIN_B3);
+output_low(PIN_B4);
+//delay_ms(2000);
+}
+
+if(b==1){
+output_low(PIN_B1);
+output_low(PIN_B2);
+output_low(PIN_B3);
+output_high(PIN_B4);
+//delay_ms(2000);
+}
+if(b==2){
+output_low(PIN_B1);
+output_low(PIN_B2);
+output_high(PIN_B3);
+output_low(PIN_B4);
+//delay_ms(2000);
+}
+if(b==3){
+output_low(PIN_B1);
+output_low(PIN_B2);
+output_high(PIN_B3);
+output_high(PIN_B4);
+//delay_ms(2000);
+}
+if(b==4){
+output_low(PIN_B1);
+output_high(PIN_B2);
+output_low(PIN_B3);
+output_low(PIN_B4);
+//delay_ms(2000);
+}
+if(b==5){
+output_low(PIN_B1);
+output_high(PIN_B2);
+output_low(PIN_B3);
+output_high(PIN_B4);
+//delay_ms(2000);
+}
+if(b==6){
+output_low(PIN_B1);
+output_high(PIN_B2);
+output_high(PIN_B3);
+output_low(PIN_B4);
+//delay_ms(2000);
+}
+if(b==7){
+output_low(PIN_B1);
+output_high(PIN_B2);
+output_high(PIN_B3);
+output_high(PIN_B4);
+//delay_ms(2000);
+}
+if(b==8){
+output_high(PIN_B1);
+output_low(PIN_B2);
+output_low(PIN_B3);
+output_low(PIN_B4);
+//delay_ms(2000);
+}
+if(b==9){
+output_high(PIN_B1);
+output_low(PIN_B2);
+output_low(PIN_B3);
+output_high(PIN_B4);
+//delay_ms(2000);
+}
+if(b==10){
+output_high(PIN_B1);
+output_low(PIN_B2);
+output_high(PIN_B3);
+output_low(PIN_B4);
+//delay_ms(2000);
+}
+if(b==11){
+output_high(PIN_B1);
+output_low(PIN_B2);
+output_high(PIN_B3);
+output_high(PIN_B4);
+//delay_ms(2000);
+}
+if(b==12){
+output_high(PIN_B1);
+output_high(PIN_B2);
+output_low(PIN_B3);
+output_low(PIN_B4);
+//delay_ms(2000);
+}
+if(b==13){
+output_high(PIN_B1);
+output_high(PIN_B2);
+output_low(PIN_B3);
+output_high(PIN_B4);
+//delay_ms(2000);
+}
+if(b==14){
+output_high(PIN_B1);
+output_high(PIN_B2);
+output_high(PIN_B3);
+output_low(PIN_B4);
+//delay_ms(2000);
+};
+if(b==15){
+output_high(PIN_B1);
+output_high(PIN_B2);
+output_high(PIN_B3);
+output_high(PIN_B4);
+//delay_ms(2000);
+}
+
+if(input(PIN_B7)==0)
+{
+string[b]= 0;
+
+}
+if(input(PIN_B7)==1)
+{
+z=z+1;
+string[b]= 1;
+
+}
+
+if(input(PIN_B6)==0)
+{
+string[b+16]= 0;
+
+}
+if(input(PIN_B6)==1)
+{
+z=z+1;
+string[b+16]= 1;
+
+}
+
+if(input(PIN_B5)==0)
+{
+string[b+32]= 0;
+
+}
+if(input(PIN_B5)==1)
+{
+z=z+1;
+string[b+32]= 1;
+
+}
+
+if(input(PIN_D0)==0)
+{
+string[b+48]= 0;
+
+}
+if(input(PIN_D0)==1)
+{
+z=z+1;
+string[b+48]= 1;
+
+}
+//printf("%u",string[b]);
+
+/*if(string[b]==string2[b])
+{
+
+}
+if(string[b]!=string2[b])
+{
+string3[r]= b;
+r=r+1;
+//output_high(PIN_B6);
+}
+*/
+/*if(string[b+16]!=string2[b+16])
+{
+string3[r]= b+16;
+r=r+1;
+//output_high(PIN_B6);
+}
+
+if(string[b+32]!=string2[b+32])
+{
+string3[r]= b+32;
+r=r+1;
+//output_high(PIN_B6);
+}
+
+if(string[b+48]!=string2[b+48])
+{
+string3[r]= b+48;
+r=r+1;
+//output_high(PIN_B6);
+}
+*/
+
+
+b=b+1;
+if(b==16){
+//printf("%s",string);
+
+//string2==string;
+
+for( i = 0;i < 64;i++)
+{
+string2[i] = string[i];
+//printf(",%u,%u,%u,",string2[i],string[i],string3[i]);
+
+}
+b=0;
+}
+
+
+
+
+}
+
+}

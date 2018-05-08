@@ -1,0 +1,18 @@
+>>> Warning 214 "main.c" Line 60(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 60(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 60(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 67(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 67(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 67(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 208 "main.c" Line 24(1,4): Function not void and does not return a value  RB0
+>>> Warning 203 "main.c" Line 108(1,1): Condition always TRUE
+>>> Warning 214 "main.c" Line 294(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 294(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 302(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 302(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 310(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 310(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 318(1,1): Operator precedance rules may not be as intended, use () to clarify
+>>> Warning 214 "main.c" Line 318(1,1): Operator precedance rules may not be as intended, use () to clarify
+      Memory usage:   ROM=14%      RAM=60% - 62%
+      0 Errors,  16 Warnings.

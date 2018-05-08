@@ -1,0 +1,136 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004     @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020     @INTERRUPT_AREA
+021     @INTERRUPT_AREA
+022     @INTERRUPT_AREA
+023     @INTERRUPT_AREA
+024     @INTERRUPT_AREA
+025     @INTERRUPT_AREA
+026     @INTERRUPT_AREA
+027-028 strtok.save
+029     x
+02A     r
+02B     z
+02C     i
+02D     j
+02E     k
+02F     w
+030     uj
+031     b
+032-071 string4
+072     uit
+073-075 pos1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+07F     @INTERRUPT_AREA
+09C.6   C1OUT
+09C.7   C2OUT
+0A0-0DF string
+0FF     @INTERRUPT_AREA
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+110-14F string2
+150     MAIN.@SCRATCH1
+151     MAIN.@SCRATCH2
+152     MAIN.@SCRATCH3
+153     @PRINTF_U_9600_62_63.P1
+153     @delay_ms1.P2
+153     RB0.@SCRATCH1
+153     @PSTRINGC7_9600_62_63.@SCRATCH1
+154     @PRINTF_U_9600_62_63.P1
+154     RB0.@SCRATCH2
+154     @PSTRINGC7_9600_62_63.@SCRATCH2
+155     @DIV88.P1
+155     RB0.@SCRATCH3
+155     @PSTRINGC7_9600_62_63.@SCRATCH3
+156     @DIV88.P1
+157     @DIV88.@SCRATCH1
+17F     @INTERRUPT_AREA
+1FF     @INTERRUPT_AREA
+27F     @INTERRUPT_AREA
+2FF     @INTERRUPT_AREA
+37F     @INTERRUPT_AREA
+3FF     @INTERRUPT_AREA
+47F     @INTERRUPT_AREA
+4FF     @INTERRUPT_AREA
+57F     @INTERRUPT_AREA
+5FF     @INTERRUPT_AREA
+67F     @INTERRUPT_AREA
+6FF     @INTERRUPT_AREA
+77F     @INTERRUPT_AREA
+7FF     @INTERRUPT_AREA
+87F     @INTERRUPT_AREA
+8FF     @INTERRUPT_AREA
+97F     @INTERRUPT_AREA
+9FF     @INTERRUPT_AREA
+A7F     @INTERRUPT_AREA
+AFF     @INTERRUPT_AREA
+B7F     @INTERRUPT_AREA
+BFF     @INTERRUPT_AREA
+C7F     @INTERRUPT_AREA
+CFF     @INTERRUPT_AREA
+D7F     @INTERRUPT_AREA
+DFF     @INTERRUPT_AREA
+E7F     @INTERRUPT_AREA
+EFF     @INTERRUPT_AREA
+F7F     @INTERRUPT_AREA
+FFF     @INTERRUPT_AREA
+
+ROM Allocation:
+006B  @delay_ms1
+00D8  RB0
+01BF  @const176
+002F  @PSTRINGC7_9600_62_63
+01C3  @const178
+007F  @DIV88
+0096  @PRINTF_U_9600_62_63
+01C7  MAIN
+01C7  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\MA_VEINTIMILLA\Desktop\MUX\
+
+Project Files:
+    main.c
+    ..\..\..\..\Program Files (x86)\PICC\devices\16f877A.h
+    ..\..\..\..\Program Files (x86)\PICC\drivers\stdio.h
+    ..\..\..\..\Program Files (x86)\PICC\drivers\string.h
+    ..\..\..\..\Program Files (x86)\PICC\drivers\stddef.h
+    ..\..\..\..\Program Files (x86)\PICC\drivers\ctype.h
+
+Units:
+    C:\Users\MA_VEINTIMILLA\Desktop\MUX\main (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.PJT
+    Call Tree:   main.tre
+    Statistics:  main.sta
