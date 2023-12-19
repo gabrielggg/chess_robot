@@ -23,6 +23,16 @@ const int rs = 2, en = 3, d4 = 8, d5 = 5, d6 = 6, d7 = 7;
 //#define b_FUNC  A3
 
 long int counter = 50; 
+int counter_reset = 0;
+int counter_reset_setup = 0;
+int val_anterior_escaque1 = 136;
+int val_anterior_escaque2 = 245;
+int val_anterior_escaque3 = 233;
+int val_anterior_escaque4 = 261;
+int val_anterior_escaque5 = 193;
+int val_anterior_escaque6 = 255;
+int val_anterior_escaque7 = 266;
+int val_anterior_escaque8 = 262;
 long int counter_ant = 0;
 long int function = 0;
 long int function_ant = 0;
@@ -89,8 +99,12 @@ void WriteRegister(int dat){
    SPI.setDataMode(SPI_MODE0);
 }
 
+void(* resetFunc) (void) = 0;  // declare reset fuction at address 0
+
 void setup(){
    Serial.begin(9600);
+   Serial.println("SETUP");
+   counter_reset_setup = 0;
    AD9833setup();
    //pinMode(b_UP, INPUT_PULLUP);
    //pinMode(b_DOWN,INPUT_PULLUP);
@@ -168,6 +182,9 @@ void setup(){
    digitalWrite(2, LOW);
    delay(50);
    val_vacio8 = analogRead(OUTDEMUX);
+
+
+   
   
 
    
@@ -180,6 +197,36 @@ void loop(){
 
       //////////////////////ESCAQUE 1////////////////////////////////////////////////
       //delay(25);
+      if (counter_reset_setup >= 60) {
+        Serial.println("RESETEOxxxxxxxxxxxxxxxxxxxxxxxxxxRESETEOxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        //resetFunc(); //call reset
+        
+        val_vacio = val_vacio - 8;
+        val_vacio2 = val_vacio2 - 8;
+        val_vacio3 = val_vacio3 - 8;
+        val_vacio4 = val_vacio4 - 8;
+        val_vacio5 = val_vacio5 - 8;
+        val_vacio6 = val_vacio6 - 8;
+        val_vacio7 = val_vacio7 - 8;
+        val_vacio8 = val_vacio8 - 8;
+        counter_reset_setup = 0;
+      } else if (counter_reset_setup <= -60){
+        Serial.println("RESETEOxxxxxxxxxxxxxxxxxxxxxxxxxxRESETEOxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        val_vacio = val_vacio + 8;
+        val_vacio2 = val_vacio2 + 8;
+        val_vacio3 = val_vacio3 + 8;
+        val_vacio4 = val_vacio4 + 8;
+        val_vacio5 = val_vacio5 + 8;
+        val_vacio6 = val_vacio6 + 8;
+        val_vacio7 = val_vacio7 + 8;
+        val_vacio8 = val_vacio8 + 8;
+        counter_reset_setup = 0;
+      } else  {
+        counter_reset_setup = 0;
+      }
+      //Serial.println(counter_reset);
+      //Serial.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+      //counter_reset++;
       digitalWrite(7, HIGH);
       digitalWrite(3, HIGH);
       digitalWrite(2, HIGH);
@@ -198,52 +245,67 @@ void loop(){
             Serial.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
           }
           contador++;
+
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque1 - val);
           Serial.println(val);
           Serial.println(val_vacio);
           Serial.println(val_vacio_color);
           Serial.println("vacio1");
+          val_anterior_escaque1 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("vacio");
       } else if (val >= ((val_vacio - val_vacio*0.32)-(val_vacio - val_vacio*0.32)*0.05) && val <= ((val_vacio - val_vacio*0.28)+(val_vacio - val_vacio*0.28)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque1 - val);
           Serial.println(val);
           Serial.println(val_vacio);
           Serial.println("peon1");
+          val_anterior_escaque1 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("peon");
       } else if (val >= ((val_vacio - val_vacio*0.10)-(val_vacio - val_vacio*0.10)*0.05) && val <= ((val_vacio - val_vacio*0.10)+(val_vacio - val_vacio*0.10)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque1 - val);
           Serial.println(val);
           Serial.println(val_vacio);
           Serial.println("torre1");
+          val_anterior_escaque1 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("torre");
       } else if (val >= ((val_vacio + val_vacio*0.23)-(val_vacio + val_vacio*0.23)*0.05) && val <= ((val_vacio + val_vacio*0.33)+(val_vacio + val_vacio*0.33)*0.05)){
           //Serial.println("caballo - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque1 - val);
           Serial.println(val);
           Serial.println(val_vacio);
           Serial.println("caballo1");
+          val_anterior_escaque1 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("caballo");
       } else if (val >= ((val_vacio + val_vacio*0.056)-(val_vacio + val_vacio*0.056)*0.03) && val <= ((val_vacio + val_vacio*0.056)+(val_vacio + val_vacio*0.056)*0.03)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque1 - val);
           Serial.println(val);
           Serial.println(val_vacio);
           Serial.println("dama1");
+          val_anterior_escaque1 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("dama");
       } else if (val >= ((val_vacio + val_vacio*0.09)-(val_vacio + val_vacio*0.09)*0.05) && val <= ((val_vacio + val_vacio*0.09)+(val_vacio + val_vacio*0.09)*0.05)){
           //Serial.println("alfil - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque1 - val);
           Serial.println(val);
           Serial.println(val_vacio);
           Serial.println("alfil1");
+          val_anterior_escaque1 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("alfil");
       }  else if (val >= ((val_vacio - val_vacio*0.198)-(val_vacio - val_vacio*0.198)*0.05) && val <= ((val_vacio - val_vacio*0.198)+(val_vacio - val_vacio*0.198)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque1 - val);
           Serial.println(val);
           Serial.println(val_vacio);
           Serial.println("rey1");
+          val_anterior_escaque1 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("rey");
       }  else {
@@ -273,52 +335,66 @@ void loop(){
             Serial.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
           }
           contador2++;
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque2 - val);
           Serial.println(val);
           Serial.println(val_vacio2);
           Serial.println(val_vacio2_color);
           Serial.println("vacio2");
+          val_anterior_escaque2 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("vacio");
       } else if (val >= ((val_vacio2 - val_vacio2*0.32)-(val_vacio2 - val_vacio2*0.32)*0.05) && val <= ((val_vacio2 - val_vacio2*0.28)+(val_vacio2 - val_vacio2*0.28)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque2 - val);
           Serial.println(val);
           Serial.println(val_vacio2);
           Serial.println("peon2");
+          val_anterior_escaque2 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("peon");
       } else if (val >= ((val_vacio2 - val_vacio2*0.10)-(val_vacio2 - val_vacio2*0.10)*0.05) && val <= ((val_vacio2 - val_vacio2*0.10)+(val_vacio2 - val_vacio2*0.10)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque2 - val);
           Serial.println(val);
           Serial.println(val_vacio2);
           Serial.println("torre2");
+          val_anterior_escaque2 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("torre");
       } else if (val >= ((val_vacio2 + val_vacio2*0.23)-(val_vacio2 + val_vacio2*0.23)*0.05) && val <= ((val_vacio2 + val_vacio2*0.33)+(val_vacio2 + val_vacio2*0.33)*0.05)){
           //Serial.println("caballo - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque2 - val);
           Serial.println(val);
           Serial.println(val_vacio2);
           Serial.println("caballo2");
+          val_anterior_escaque2 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("caballo");
       } else if (val >= ((val_vacio2 + val_vacio2*0.056)-(val_vacio2 + val_vacio2*0.056)*0.03) && val <= ((val_vacio2 + val_vacio2*0.056)+(val_vacio2 + val_vacio2*0.056)*0.03)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque2 - val);
           Serial.println(val);
           Serial.println(val_vacio2);
           Serial.println("dama2");
+          val_anterior_escaque2 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("dama");
       } else if (val >= ((val_vacio2 + val_vacio2*0.09)-(val_vacio2 + val_vacio2*0.09)*0.05) && val <= ((val_vacio2 + val_vacio2*0.09)+(val_vacio2 + val_vacio2*0.09)*0.05)){
           //Serial.println("alfil - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque2 - val);
           Serial.println(val);
           Serial.println(val_vacio2);
           Serial.println("alfil2");
+          val_anterior_escaque2 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("alfil");
       }  else if (val >= ((val_vacio2 - val_vacio2*0.198)-(val_vacio2 - val_vacio2*0.198)*0.05) && val <= ((val_vacio2 - val_vacio2*0.198)+(val_vacio2 - val_vacio2*0.198)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque2 - val);
           Serial.println(val);
           Serial.println(val_vacio2);
           Serial.println("rey2");
+          val_anterior_escaque2 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("rey");
       }  else {
@@ -348,52 +424,66 @@ void loop(){
             Serial.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
           }
           contador3++;
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque3 - val);
           Serial.println(val);
           Serial.println(val_vacio3);
           Serial.println(val_vacio3_color);
           Serial.println("vacio3");
+          val_anterior_escaque3 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("vacio");
       } else if (val >= ((val_vacio3 - val_vacio3*0.32)-(val_vacio3 - val_vacio3*0.32)*0.05) && val <= ((val_vacio3 - val_vacio3*0.28)+(val_vacio3 - val_vacio3*0.28)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque3 - val);
           Serial.println(val);
           Serial.println(val_vacio3);
           Serial.println("peon3");
+          val_anterior_escaque3 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("peon");
       } else if (val >= ((val_vacio3 - val_vacio3*0.10)-(val_vacio3 - val_vacio3*0.10)*0.05) && val <= ((val_vacio3 - val_vacio3*0.10)+(val_vacio3 - val_vacio3*0.10)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque3 - val);
           Serial.println(val);
           Serial.println(val_vacio3);
           Serial.println("torre3");
+          val_anterior_escaque3 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("torre");
       } else if (val >= ((val_vacio3 + val_vacio3*0.23)-(val_vacio3 + val_vacio3*0.23)*0.05) && val <= ((val_vacio3 + val_vacio3*0.33)+(val_vacio3 + val_vacio3*0.33)*0.05)){
           //Serial.println("caballo - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque3 - val);
           Serial.println(val);
           Serial.println(val_vacio3);
           Serial.println("caballo3");
+          val_anterior_escaque3 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("caballo");
       } else if (val >= ((val_vacio3 + val_vacio3*0.056)-(val_vacio3 + val_vacio3*0.056)*0.03) && val <= ((val_vacio3 + val_vacio3*0.056)+(val_vacio3 + val_vacio3*0.056)*0.03)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque3 - val);
           Serial.println(val);
           Serial.println(val_vacio3);
           Serial.println("dama3");
+          val_anterior_escaque3 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("dama");
       } else if (val >= ((val_vacio3 + val_vacio3*0.09)-(val_vacio3 + val_vacio3*0.09)*0.05) && val <= ((val_vacio3 + val_vacio3*0.09)+(val_vacio3 + val_vacio3*0.09)*0.05)){
           //Serial.println("alfil - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque3 - val);
           Serial.println(val);
           Serial.println(val_vacio3);
           Serial.println("alfil3");
+          val_anterior_escaque3 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("alfil");
       }  else if (val >= ((val_vacio3 - val_vacio3*0.198)-(val_vacio3 - val_vacio3*0.198)*0.05) && val <= ((val_vacio3 - val_vacio3*0.198)+(val_vacio3 - val_vacio3*0.198)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque3 - val);
           Serial.println(val);
           Serial.println(val_vacio3);
           Serial.println("rey3");
+          val_anterior_escaque3 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("rey");
       }  else {
@@ -423,52 +513,66 @@ void loop(){
             Serial.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
           }
           contador4++;
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque4 - val);
           Serial.println(val);
           Serial.println(val_vacio4);
           Serial.println(val_vacio4_color);
           Serial.println("vacio4");
+          val_anterior_escaque4 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("vacio");
       } else if (val >= ((val_vacio4 - val_vacio4*0.32)-(val_vacio4 - val_vacio4*0.32)*0.05) && val <= ((val_vacio4 - val_vacio4*0.28)+(val_vacio4 - val_vacio4*0.28)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque4 - val);
           Serial.println(val);
           Serial.println(val_vacio4);
           Serial.println("peon4");
+          val_anterior_escaque4 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("peon");
       } else if (val >= ((val_vacio4 - val_vacio4*0.10)-(val_vacio4 - val_vacio4*0.10)*0.05) && val <= ((val_vacio4 - val_vacio4*0.10)+(val_vacio4 - val_vacio4*0.10)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque4 - val);
           Serial.println(val);
           Serial.println(val_vacio4);
           Serial.println("torre4");
+          val_anterior_escaque4 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("torre");
       } else if (val >= ((val_vacio4 + val_vacio4*0.23)-(val_vacio4 + val_vacio4*0.23)*0.05) && val <= ((val_vacio4 + val_vacio4*0.33)+(val_vacio4 + val_vacio4*0.33)*0.05)){
           //Serial.println("caballo - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque4 - val);
           Serial.println(val);
           Serial.println(val_vacio4);
           Serial.println("caballo4");
+          val_anterior_escaque4 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("caballo");
       } else if (val >= ((val_vacio4 + val_vacio4*0.056)-(val_vacio4 + val_vacio4*0.056)*0.03) && val <= ((val_vacio4 + val_vacio4*0.056)+(val_vacio4 + val_vacio4*0.056)*0.03)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque4 - val);
           Serial.println(val);
           Serial.println(val_vacio4);
           Serial.println("dama4");
+          val_anterior_escaque4 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("dama");
       } else if (val >= ((val_vacio4 + val_vacio4*0.09)-(val_vacio4 + val_vacio4*0.09)*0.05) && val <= ((val_vacio4 + val_vacio4*0.09)+(val_vacio4 + val_vacio4*0.09)*0.05)){
           //Serial.println("alfil - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque4 - val);
           Serial.println(val);
           Serial.println(val_vacio4);
           Serial.println("alfil4");
+          val_anterior_escaque4 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("alfil");
       }  else if (val >= ((val_vacio4 - val_vacio4*0.198)-(val_vacio4 - val_vacio4*0.198)*0.05) && val <= ((val_vacio4 - val_vacio4*0.198)+(val_vacio4 - val_vacio4*0.198)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque4 - val);
           Serial.println(val);
           Serial.println(val_vacio4);
           Serial.println("rey4");
+          val_anterior_escaque4 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("rey");
       }  else {
@@ -498,52 +602,66 @@ void loop(){
             Serial.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
           }
           contador4++;
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque5 - val);
           Serial.println(val);
           Serial.println(val_vacio5);
           Serial.println(val_vacio4_color);
           Serial.println("vacio5");
+          val_anterior_escaque5 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("vacio");
       } else if (val >= ((val_vacio5 - val_vacio5*0.32)-(val_vacio5 - val_vacio5*0.32)*0.05) && val <= ((val_vacio5 - val_vacio5*0.28)+(val_vacio5 - val_vacio5*0.28)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque5 - val);
           Serial.println(val);
           Serial.println(val_vacio5);
           Serial.println("peon5");
+          val_anterior_escaque5 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("peon");
       } else if (val >= ((val_vacio5 - val_vacio5*0.10)-(val_vacio5 - val_vacio5*0.10)*0.05) && val <= ((val_vacio5 - val_vacio5*0.10)+(val_vacio5 - val_vacio5*0.10)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque5 - val);
           Serial.println(val);
           Serial.println(val_vacio5);
           Serial.println("torre5");
+          val_anterior_escaque5 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("torre");
       } else if (val >= ((val_vacio5 + val_vacio5*0.23)-(val_vacio5 + val_vacio5*0.23)*0.05) && val <= ((val_vacio5 + val_vacio5*0.33)+(val_vacio5 + val_vacio5*0.33)*0.05)){
           //Serial.println("caballo - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque5 - val);
           Serial.println(val);
           Serial.println(val_vacio5);
           Serial.println("caballo5");
+          val_anterior_escaque5 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("caballo");
       } else if (val >= ((val_vacio5 + val_vacio5*0.056)-(val_vacio5 + val_vacio5*0.056)*0.03) && val <= ((val_vacio5 + val_vacio5*0.056)+(val_vacio5 + val_vacio5*0.056)*0.03)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque5 - val);
           Serial.println(val);
           Serial.println(val_vacio5);
           Serial.println("dama5");
+          val_anterior_escaque5 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("dama");
       } else if (val >= ((val_vacio5 + val_vacio5*0.09)-(val_vacio5 + val_vacio5*0.09)*0.05) && val <= ((val_vacio5 + val_vacio5*0.09)+(val_vacio5 + val_vacio5*0.09)*0.05)){
           //Serial.println("alfil - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque5 - val);
           Serial.println(val);
           Serial.println(val_vacio5);
           Serial.println("alfil5");
+          val_anterior_escaque5 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("alfil");
       }  else if (val >= ((val_vacio5 - val_vacio5*0.198)-(val_vacio5 - val_vacio5*0.198)*0.05) && val <= ((val_vacio5 - val_vacio5*0.198)+(val_vacio5 - val_vacio5*0.198)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque5 - val);
           Serial.println(val);
           Serial.println(val_vacio5);
           Serial.println("rey5");
+          val_anterior_escaque5 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("rey");
       }  else {
@@ -573,52 +691,66 @@ void loop(){
             Serial.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
           }
           contador4++;
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque6 - val);
           Serial.println(val);
           Serial.println(val_vacio6);
           Serial.println(val_vacio6_color);
           Serial.println("vacio6");
+          val_anterior_escaque6 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("vacio");
       } else if (val >= ((val_vacio6 - val_vacio6*0.32)-(val_vacio6 - val_vacio6*0.32)*0.05) && val <= ((val_vacio6 - val_vacio6*0.28)+(val_vacio6 - val_vacio6*0.28)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque6 - val);
           Serial.println(val);
           Serial.println(val_vacio6);
           Serial.println("peon6");
+          val_anterior_escaque6 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("peon");
       } else if (val >= ((val_vacio6 - val_vacio6*0.10)-(val_vacio6 - val_vacio6*0.10)*0.05) && val <= ((val_vacio6 - val_vacio6*0.10)+(val_vacio6 - val_vacio6*0.10)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque6 - val);
           Serial.println(val);
           Serial.println(val_vacio6);
           Serial.println("torre6");
+          val_anterior_escaque6 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("torre");
       } else if (val >= ((val_vacio6 + val_vacio6*0.23)-(val_vacio6 + val_vacio6*0.23)*0.05) && val <= ((val_vacio6 + val_vacio6*0.33)+(val_vacio6 + val_vacio6*0.33)*0.05)){
           //Serial.println("caballo - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque6 - val);
           Serial.println(val);
           Serial.println(val_vacio6);
           Serial.println("caballo6");
+          val_anterior_escaque6 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("caballo");
       } else if (val >= ((val_vacio6 + val_vacio6*0.056)-(val_vacio6 + val_vacio6*0.056)*0.03) && val <= ((val_vacio6 + val_vacio6*0.056)+(val_vacio6 + val_vacio6*0.056)*0.03)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque6 - val);
           Serial.println(val);
           Serial.println(val_vacio6);
           Serial.println("dama6");
+          val_anterior_escaque6 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("dama");
       } else if (val >= ((val_vacio6 + val_vacio6*0.09)-(val_vacio6 + val_vacio6*0.09)*0.05) && val <= ((val_vacio6 + val_vacio6*0.09)+(val_vacio6 + val_vacio6*0.09)*0.05)){
           //Serial.println("alfil - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque6 - val);
           Serial.println(val);
           Serial.println(val_vacio6);
           Serial.println("alfil6");
+          val_anterior_escaque6 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("alfil");
       }  else if (val >= ((val_vacio6 - val_vacio6*0.198)-(val_vacio6 - val_vacio6*0.198)*0.05) && val <= ((val_vacio6 - val_vacio6*0.198)+(val_vacio6 - val_vacio6*0.198)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque6 - val);
           Serial.println(val);
           Serial.println(val_vacio6);
           Serial.println("rey6");
+          val_anterior_escaque6 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("rey");
       }  else {
@@ -648,52 +780,66 @@ void loop(){
             Serial.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
           }
           contador4++;
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque7 - val);
           Serial.println(val);
           Serial.println(val_vacio7);
           Serial.println(val_vacio7_color);
           Serial.println("vacio7");
+          val_anterior_escaque7 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("vacio");
       } else if (val >= ((val_vacio7 - val_vacio7*0.32)-(val_vacio7 - val_vacio7*0.32)*0.05) && val <= ((val_vacio7 - val_vacio7*0.28)+(val_vacio7 - val_vacio7*0.28)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque7 - val);
           Serial.println(val);
           Serial.println(val_vacio7);
           Serial.println("peon7");
+          val_anterior_escaque7 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("peon");
       } else if (val >= ((val_vacio7 - val_vacio7*0.10)-(val_vacio7 - val_vacio7*0.10)*0.05) && val <= ((val_vacio7 - val_vacio7*0.10)+(val_vacio7 - val_vacio7*0.10)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque7 - val);
           Serial.println(val);
           Serial.println(val_vacio7);
           Serial.println("torre7");
+          val_anterior_escaque7 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("torre");
       } else if (val >= ((val_vacio7 + val_vacio7*0.23)-(val_vacio7 + val_vacio7*0.23)*0.05) && val <= ((val_vacio7 + val_vacio7*0.33)+(val_vacio7 + val_vacio7*0.33)*0.05)){
           //Serial.println("caballo - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque7 - val);
           Serial.println(val);
           Serial.println(val_vacio7);
           Serial.println("caballo7");
+          val_anterior_escaque7 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("caballo");
       } else if (val >= ((val_vacio7 + val_vacio7*0.056)-(val_vacio7 + val_vacio7*0.056)*0.03) && val <= ((val_vacio7 + val_vacio7*0.056)+(val_vacio7 + val_vacio7*0.056)*0.03)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque7 - val);
           Serial.println(val);
           Serial.println(val_vacio7);
           Serial.println("dama7");
+          val_anterior_escaque7 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("dama");
       } else if (val >= ((val_vacio7 + val_vacio7*0.09)-(val_vacio7 + val_vacio7*0.09)*0.05) && val <= ((val_vacio7 + val_vacio7*0.09)+(val_vacio7 + val_vacio7*0.09)*0.05)){
           //Serial.println("alfil - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque7 - val);
           Serial.println(val);
           Serial.println(val_vacio7);
           Serial.println("alfil7");
+          val_anterior_escaque7 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("alfil");
       }  else if (val >= ((val_vacio7 - val_vacio7*0.198)-(val_vacio7 - val_vacio7*0.198)*0.05) && val <= ((val_vacio7 - val_vacio7*0.198)+(val_vacio7 - val_vacio7*0.198)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque7 - val);
           Serial.println(val);
           Serial.println(val_vacio7);
           Serial.println("rey7");
+          val_anterior_escaque7 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("rey");
       }  else {
@@ -723,52 +869,66 @@ void loop(){
             Serial.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
           }
           contador4++;
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque8 - val);
           Serial.println(val);
           Serial.println(val_vacio8);
           Serial.println(val_vacio8_color);
           Serial.println("vacio8");
+          val_anterior_escaque8 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("vacio");
       } else if (val >= ((val_vacio8 - val_vacio8*0.32)-(val_vacio8 - val_vacio8*0.32)*0.05) && val <= ((val_vacio8 - val_vacio8*0.28)+(val_vacio8 - val_vacio8*0.28)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque8 - val);
           Serial.println(val);
           Serial.println(val_vacio8);
           Serial.println("peon8");
+          val_anterior_escaque8 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("peon");
       } else if (val >= ((val_vacio8 - val_vacio8*0.10)-(val_vacio8 - val_vacio8*0.10)*0.05) && val <= ((val_vacio8 - val_vacio8*0.10)+(val_vacio8 - val_vacio8*0.10)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque8 - val);
           Serial.println(val);
           Serial.println(val_vacio8);
           Serial.println("torre8");
+          val_anterior_escaque8 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("torre");
       } else if (val >= ((val_vacio8 + val_vacio8*0.23)-(val_vacio8 + val_vacio8*0.23)*0.05) && val <= ((val_vacio8 + val_vacio8*0.33)+(val_vacio8 + val_vacio8*0.33)*0.05)){
           //Serial.println("caballo - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque8 - val);
           Serial.println(val);
           Serial.println(val_vacio8);
           Serial.println("caballo8");
+          val_anterior_escaque8 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("caballo");
       } else if (val >= ((val_vacio8 + val_vacio8*0.056)-(val_vacio8 + val_vacio8*0.056)*0.03) && val <= ((val_vacio8 + val_vacio8*0.056)+(val_vacio8 + val_vacio8*0.056)*0.03)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque8 - val);
           Serial.println(val);
           Serial.println(val_vacio8);
           Serial.println("dama8");
+          val_anterior_escaque8 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("dama");
       } else if (val >= ((val_vacio8 + val_vacio8*0.09)-(val_vacio8 + val_vacio8*0.09)*0.05) && val <= ((val_vacio8 + val_vacio8*0.09)+(val_vacio8 + val_vacio8*0.09)*0.05)){
           //Serial.println("alfil - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque8 - val);
           Serial.println(val);
           Serial.println(val_vacio8);
           Serial.println("alfil8");
+          val_anterior_escaque8 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("alfil");
       }  else if (val >= ((val_vacio8 - val_vacio8*0.198)-(val_vacio8 - val_vacio8*0.198)*0.05) && val <= ((val_vacio8 - val_vacio8*0.198)+(val_vacio8 - val_vacio8*0.198)*0.05)){
           //Serial.println("peon - B");
+          counter_reset_setup = counter_reset_setup + (val_anterior_escaque8 - val);
           Serial.println(val);
           Serial.println(val_vacio8);
           Serial.println("rey8");
+          val_anterior_escaque8 = val;
           //lcd.setCursor(0, 0);
           //lcd.print("rey");
       }  else {
